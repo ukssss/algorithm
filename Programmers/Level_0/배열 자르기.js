@@ -6,10 +6,16 @@
 // 0 ≤ numbers의 원소 ≤ 1,000
 // 0 ≤num1 < num2 < numbers의 길이
 
+// 풀이 1
 function solution(numbers, num1, num2) {
   let arr = [];
   for (let i = num1; i <= num2; i++) {
     arr.push(numbers[i]);
   }
   return arr;
+}
+
+// 풀이 2
+function solution2(numbers, num1, num2) {
+  return numbers.splice(num1, num2 - num1 + 1);
 }
