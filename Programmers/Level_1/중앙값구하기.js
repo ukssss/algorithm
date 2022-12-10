@@ -7,11 +7,9 @@
 // -1,000 < array의 원소 < 1,000
 
 function solution(array) {
-  let test = 0;
-  let answer = [0];
-  for (let i = 0; i < array.length; i++) {
-    if (answer[j] < array[i]) {
-      answer[i] = array[i];
-    }
-  }
+  // 오름차순 배열 정렬, 크면 양수, 작으면 음수, 같으면 0
+  let asc_array = array.sort((a, b) => a - b);
+  // 중앙값 좌표 계산
+  let midNum = Math.floor(array.length / 2);
+  return asc_array[midNum];
 }
