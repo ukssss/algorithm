@@ -25,3 +25,18 @@ const input = require("fs").readFileSync("example.txt").toString().trim();
 // 2~6에서 입력받는 값들을 모두 String에서 Number로 바꾸려면 split()뒤에 .map(Number)를 추가
 
 // 코딩 스타트 ! ---------------------------------------------------------- //
+const price = parseInt(input);
+
+function solution(price) {
+  if (price >= 500000) {
+    price *= 0.8;
+  } else if (price >= 300000 && price < 500000) {
+    price *= 0.9;
+  } else if (price >= 100000 && price < 300000) {
+    price *= 0.95;
+  }
+
+  return price;
+}
+
+solution(price);
