@@ -1,10 +1,7 @@
 const input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
 
-let [h, m] = input[0].trim().split(" ");
-const add = parseInt(input[1]);
-
-h = parseInt(h);
-m = parseInt(m) + add;
+let [h, m] = input[0].trim().split(" ").map(Number);
+m += Number(input[1]);
 
 while (m >= 60) {
   h += 1;
