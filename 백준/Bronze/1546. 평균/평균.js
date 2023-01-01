@@ -1,18 +1,12 @@
 const input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
 
-let cnt = input[0];
-let subject = input[1].split(" ").map((x) => Number(x));
-let max = Math.max.apply(null, subject);
-let edit = [];
+const num = Number(input[0]);
+const subject = input[1].split(" ");
+const max = Math.max(...subject);
+let sum = 0;
 
-subject.forEach((x) => {
-  const num = (x / max) * 100;
-  edit.push(num);
-});
+for (let i = 0; i < num; i++) {
+  sum += (subject[i] / max) * 100;
+}
 
-const total = edit.reduce(function add(sum, currValue) {
-  return sum + currValue;
-}, 0);
-
-const avg = total / edit.length;
-console.log(avg);
+console.log(sum / num);
