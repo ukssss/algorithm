@@ -1,15 +1,18 @@
-let [h, m] = require("fs").readFileSync("/dev/stdin").toString().trim().split(" ");
+const input = require("fs")
+  .readFileSync("/dev/stdin")
+  .toString()
+  .trim()
+  .split(" ")
+  .map((x) => Number(x));
 
-let setM = m - 45;
+let hour = input[0];
+let min = input[1];
 
-if (setM < 0) {
-  h -= 1;
-  m = 60 + setM;
-  if (h < 0) {
-    h = 23;
-  }
-} else {
-  m -= 45;
-}
+if (min - 45 < 0) {
+  if (hour === 0) {
+    hour = 23;
+  } else hour -= 1;
+  min = 60 + (min - 45);
+} else min -= 45;
 
-console.log(h, m);
+console.log(hour, min);
