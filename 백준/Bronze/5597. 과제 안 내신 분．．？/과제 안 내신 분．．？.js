@@ -5,14 +5,14 @@ const input = require("fs")
   .split("\n")
   .map((x) => Number(x));
 
-let map = new Map();
+let arr = [];
 
-for (let i = 0; i < input.length; i++) {
-  map.set(input[i], 1);
+for (let i = 1; i < 31; i++) {
+  arr.push(i);
 }
 
-for (let i = 0; i < 30; i++) {
-  if (!map.has(i + 1)) {
-    console.log(i + 1);
-  }
+let diff = arr.filter((x) => input.indexOf(x) === -1);
+
+while (diff.length) {
+  console.log(diff.shift());
 }
