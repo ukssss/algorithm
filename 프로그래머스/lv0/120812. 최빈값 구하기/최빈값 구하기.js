@@ -1,38 +1,30 @@
 function solution(array) {
-  const ascArray = array.sort((a, b) => a - b);
-  let before = -1;
-  let mode = -1;
-  let cnt = 0;
-  let repeatCnt = 0;
+  // 1,2,3,3,3,4
+  const arr = array.sort((a, b) => a - b); // 오름차순 정렬
+  let before = -1; // 시작값 1
+  let cnt = 0; // 빈도수 0
+  let maxCnt = 0; // 최대 빈도수 0
+  let max = -1; // 최빈값 0
   let isDup = false;
 
-  for (let i = 0; i < array.length; i++) {
-    // 중복된 값의 개수 측정
-    if (before !== array[i]) {
-      cnt = 1;
-    } else {
-      cnt += 1;
-    }
-    // 최빈값이 여러개일 경우 -1 출력
-    if (cnt === repeatCnt) {
-      if (mode !== array[i]) {
+  for (let i = 0; i < arr.length; i++) {
+    // 1, 1, 2, 2
+    before !== arr[i] ? (cnt = 1) : (cnt += 1);
+
+    if (cnt === maxCnt) {
+      if (max !== arr[i]) {
         isDup = true;
       }
     }
-    // 기존 최빈값보다 더 큰 최빈값이 나타날 경우
-    if (cnt > repeatCnt) {
-      repeatCnt = cnt;
-      mode = array[i];
+
+    if (cnt > maxCnt) {
+      max = array[i];
+      maxCnt = cnt;
       isDup = false;
     }
-    // 기존 값을 이전 값으로 대치
-    before = array[i];
+
+    before = arr[i];
   }
 
-  // 최빈값이 여러개일 경우, 아닐 경우
-  if (isDup) {
-    return -1;
-  } else {
-    return mode;
-  }
+  return isDup ? -1 : max;
 }
