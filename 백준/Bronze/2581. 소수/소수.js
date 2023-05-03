@@ -18,10 +18,6 @@ for (let i = M; i <= N; i++) {
   sosuCheck(i) && sosu.push(i);
 }
 
-let sumResult = 0;
-
-for (let i = 0; i < sosu.length; i++) {
-  sumResult += sosu[i];
-}
-
-console.log(sosu.length ? `${sumResult}\n${sosu[0]}` : -1);
+let sumResult = sosu.reduce((sum, cur) => sum + cur, 0);
+let minResult = Math.min(...sosu);
+console.log(sosu.length ? `${sumResult}\n${minResult}` : -1);
