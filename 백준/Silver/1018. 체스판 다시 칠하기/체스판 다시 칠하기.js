@@ -4,37 +4,26 @@ const [N, M] = n.split(' ').map(Number);
 const whiteBoard = ['WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW'];
 const blackBoard = ['BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB'];
 
-let changePoint = [];
+let modify = [];
 
-function whiteBoardType(x, y) {
-  let cnt = 0;
+function checkBoard(x, y) {
+  let whiteCheck = 0;
+  let blackCheck = 0;
+
   for (let i = y; i < y + 8; i++) {
     for (let j = x; j < x + 8; j++) {
-      if (board[i][j] !== whiteBoard[i - y][j - x]) {
-        cnt++;
-      }
+      board[i][j] !== whiteBoard[i - y][j - x] && whiteCheck++;
+      board[i][j] !== blackBoard[i - y][j - x] && blackCheck++;
     }
   }
-  return cnt;
+
+  return whiteCheck < blackCheck ? whiteCheck : blackCheck;
 }
 
-function blackBoardType(x, y) {
-  let cnt = 0;
-  for (let i = y; i < y + 8; i++) {
-    for (let j = x; j < x + 8; j++) {
-      if (board[i][j] !== blackBoard[i - y][j - x]) {
-        cnt++;
-      }
-    }
-  }
-  return cnt;
-}
-
-for (let i = 0; i + 7 < N; i++) {
-  for (let j = 0; j + 7 < M; j++) {
-    changePoint.push(whiteBoardType(j, i));
-    changePoint.push(blackBoardType(j, i));
+for (let i = 0; i + 7 < M; i++) {
+  for (let j = 0; j + 7 < N; j++) {
+    modify.push(checkBoard(i, j));
   }
 }
 
-console.log(Math.min(...changePoint));
+console.log(Math.min(...modify));
