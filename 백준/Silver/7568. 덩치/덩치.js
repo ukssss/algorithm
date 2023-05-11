@@ -6,8 +6,7 @@ const size = input
   .toString()
   .split(',')
   .map((el) => el.split(' ').map(Number));
-
-let rank = [];
+const rank = [];
 
 for (let i = 0; i < N; i++) {
   let cnt = 1;
@@ -18,7 +17,6 @@ for (let i = 0; i < N; i++) {
       }
     }
   }
-
   rank.push(cnt);
 }
 
