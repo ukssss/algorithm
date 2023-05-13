@@ -1,10 +1,10 @@
 let N = Number(require('fs').readFileSync('/dev/stdin').toString().trim());
 
-const chess = new Array(N + 1);
+const chess = new Array(N);
 let answer = 0;
 
 const isValid = (col) => {
-  for (let i = 1; i <= col - 1; i++) {
+  for (let i = 0; i < col; i++) {
     if (chess[col] === chess[i] || col - i === Math.abs(chess[col] - chess[i])) {
       return false;
     }
@@ -13,18 +13,18 @@ const isValid = (col) => {
 };
 
 const setQueen = (col) => {
-  if (col > N) {
+  if (col === N) {
     answer++;
     return;
   }
 
-  for (let row = 1; row <= N; row++) {
+  for (let row = 0; row < N; row++) {
     chess[col] = row;
 
     if (isValid(col)) setQueen(col + 1);
   }
 };
 
-setQueen(1);
+setQueen(0);
 
 console.log(answer);
