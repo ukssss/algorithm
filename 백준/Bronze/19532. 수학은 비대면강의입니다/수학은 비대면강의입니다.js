@@ -1,6 +1,10 @@
 const [a, b, c, d, e, f] = require('fs').readFileSync('/dev/stdin').toString().trim().split(' ').map(Number);
 
-const y = (a * f - c * d) / (a * e - b * d);
-const x = (c - b * y) / a || (f - e * y) / d;
-
-console.log(`${x} ${y}`);
+for (let x = -999; x < 1000; x++) {
+  for (let y = -999; y < 1000; y++) {
+    if (a * x + b * y === c && d * x + e * y === f) {
+      console.log(`${x} ${y}`);
+      break;
+    }
+  }
+}
