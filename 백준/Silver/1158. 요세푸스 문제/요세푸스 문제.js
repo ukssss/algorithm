@@ -9,11 +9,11 @@ function solution(size, target) {
     const shiftItem = queue.shift();
     if (cnt % target === 0) {
       josephus.push(shiftItem);
-      cnt = 0;
+      cnt = 1;
     } else {
       queue.push(shiftItem);
+      cnt++;
     }
-    cnt++;
   }
 
   console.log(`<${josephus.join(', ')}>`);
