@@ -46,9 +46,9 @@ class Queue {
 function solution(n) {
   const queue = new Queue();
 
-  for (let i = 1; i <= input; i++) queue.push(i);
+  for (let i = 1; i <= n; i++) queue.push(i);
 
-  while (queue.length > 1) {
+  while (queue.getSize() > 1) {
     queue.removeHead();
     queue.push(queue.getHead());
     queue.removeHead();
