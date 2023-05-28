@@ -2,16 +2,16 @@ const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('
 
 const [n, ...sequence] = input;
 
-function solution(testCase, list) {
+function solution(num, list) {
   const stack = [];
   let command = [];
-  let num = 1;
+  let cnt = 1;
 
-  for (let i = 0; i < testCase; i++) {
-    while (num <= list[i]) {
-      stack.push(num);
+  for (let i = 0; i < list.length; i++) {
+    while (cnt <= sequence[i]) {
+      stack.push(cnt);
       command.push('+');
-      num++;
+      cnt++;
     }
 
     const popItem = stack.pop();
@@ -22,7 +22,6 @@ function solution(testCase, list) {
       break;
     }
   }
-
   return command.join('\n');
 }
 
