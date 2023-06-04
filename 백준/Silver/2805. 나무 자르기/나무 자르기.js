@@ -11,8 +11,11 @@ let ans = 0;
 while (start <= end) {
     let mid = Math.floor((start + end) / 2);
     let sum = 0;
+
     for (let x of tree) {
-        if (x > mid) sum += x - mid;
+        if (x > mid) {
+            sum += x - mid;
+        }
     }
 
     if (sum >= M) {
