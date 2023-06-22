@@ -1,51 +1,41 @@
 const input = require('fs')
-    .readFileSync('dev/stdin', 'utf-8')
+    .readFileSync('/dev/stdin')
     .toString()
     .trim()
-    .split('\n');
-let answer = [];
-let T = Number(input.shift());
+    .split('\n')
+    .slice(1)
+    .map((el) => {
+        const [x1, y1, r1, x2, y2, r2] = el.split(' ').map(Number);
 
-for(let i=0; i < T; i++) {
-    let arr = input[i].split(' ').map(Number);
+        const p1 = { x: x1, y: y1 };
+        const p2 = { x: x2, y: y2 };
 
-    let x1, x2, y1, y2, r1, r2;
-    if(arr[2] > arr[5]) {
-        r1 = arr[5];
-        r2 = arr[2];
-        x1 = arr[3];
-        x2 = arr[0];
-        y1 = arr[4];
-        y2 = arr[1];
-    } else {
-        r1 = arr[2];
-        r2 = arr[5];
-        x1 = arr[0];
-        x2 = arr[3];
-        y1 = arr[1];
-        y2 = arr[4];
-    }
-    let sum = r1 + r2;
-    let sub = r2 - r1;
-    let len = Math.sqrt((x1-x2)**2 + (y1-y2)**2);
+        const d = distance(p1, p2);
+        const spot = checkPoint(d, r1, r2);
+        return spot;
+    });
 
-    if(sub < len && sum > len) {
-        answer.push(2);
-    } else if(sum === len) {
-        answer.push(1);
-    } else if(sub === len && len !==0) {
-        answer.push(1);
-    } else if(sum < len) {
-        answer.push(0);
-    } else if(sub > len) {
-        answer.push(0);
-    } else if(len === 0) {
-        if(r1 === r2) {
-            answer.push(-1);
+function distance(p1, p2) {
+    return (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2;
+}
+
+function checkPoint(d, r1, r2) {
+    const sum = (r1 + r2) ** 2;
+    const sub = (r1 - r2) ** 2;
+
+    if (d < sum && d > sub) {
+        return 2;
+    } else if (d === sum || (d === sub && d !== 0)) {
+        return 1;
+    } else if (d > sum || d < sub) {
+        return 0;
+    } else if (d === 0) {
+        if (r1 === r2) {
+            return -1;
         } else {
-            answer.push(0);
+            return 0;
         }
     }
 }
 
-console.log(answer.join('\n'));
+console.log(input.join('\n'));
