@@ -1,35 +1,40 @@
-const [T, ...testCase] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+const [_, ...input] = require('fs')
+    .readFileSync('/dev/stdin')
+    .toString()
+    .trim()
+    .split('\n')
+    .map((el) => el.split(' ').map(Number));
 
 function solution(list) {
     const arr = [];
 
-    for (const item of list) {
-        const [N, M] = item.split(' ').map(Number);
-        const dp = Array.from(Array(N + 1), () => Array(M + 1).fill(0));
+    list.map((el) => {
+        const west = el[0];
+        const east = el[1];
+        const dp = Array.from(Array(west + 1), () => Array(east + 1).fill(0));
 
-        for (let i = 1; i <= N; i++) {
-            for (let j = 1; j <= M; j++) {
-                if (i === 1) {
-                    // [1][j]
-                    dp[i][j] = j; // 1,2,3,4,5....
+        for (let i = 1; i <= west; i++) {
+            for (let j = i; j <= east; j++) {
+                if (i === j) {
+                    dp[i][j] = 1;
+                } else if (i === 1) {
+                    dp[i][j] = j;
                 } else {
-                    // [i][j]
-                    if (i === j) {
-                        dp[i][j] = 1;
-                    } else if (i < j) {
-                        for (let k = 1; k < j; k++) {
-                            dp[i][j] += dp[i - 1][k];
-                        }
+                    let temp = 0;
+                    for (let k = 1; k < j; k++) {
+                        temp += dp[i - 1][k];
                     }
+                    dp[i][j] = temp;
                 }
             }
         }
 
-        arr.push(dp[N][M]);
-    }
+        arr.push(dp[west][east]);
+    });
 
     return arr.join('\n');
 }
 
-const answer = solution(testCase);
-console.log(answer);
+const ans = solution(input);
+console.log(ans);
+
