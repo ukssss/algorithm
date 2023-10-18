@@ -11,11 +11,7 @@ function solution(numbers) {
         answer += num;
     });
 
-    if (answer.startsWith('0')) {
-        return '0';
-    } else {
-        return answer;
-    }
+    return answer[0] === '0' ? '0' : answer;
 }
 
 function condition(a, b) {
