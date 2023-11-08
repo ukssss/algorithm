@@ -54,8 +54,8 @@ class Queue {
     }
 }
 
-const distance = (n_x, n_y, x, y) => {
-    return Math.abs(n_x - x) + Math.abs(n_y - y);
+const manhattan = (now_x, now_y, spot_x, spot_y) => {
+    return Math.abs(now_x - spot_x) + Math.abs(now_y - spot_y);
 };
 
 const solution = (n, songdo) => {
@@ -74,8 +74,8 @@ const solution = (n, songdo) => {
         for (let store of store_list) {
             if (!visited.has(store)) {
                 const [store_x, store_y] = store;
-                const d = distance(now_x, now_y, store_x, store_y);
-                if (d <= 1000) {
+                const distance = manhattan(now_x, now_y, store_x, store_y);
+                if (distance <= 1000) {
                     if (store_x === finish_x && store_y === finish_y) return 'happy';
                     visited.add(store);
                     queue.enqueue(store);
@@ -91,7 +91,8 @@ for (let i = 0; i < t; i++) {
     const n = +input.shift();
     const songdo = [];
     for (let j = 0; j < n + 2; j++) {
-        songdo.push(input.shift().split(' ').map(Number));
+        const place = input.shift().split(' ').map(Number);
+        songdo.push(place);
     }
 
     console.log(solution(n, songdo));
