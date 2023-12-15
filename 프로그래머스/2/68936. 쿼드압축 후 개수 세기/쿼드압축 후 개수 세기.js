@@ -1,25 +1,24 @@
 function solution(arr) {
-    const ans = [0, 0];
-    const m = arr.length;
+    let answer = [0, 0];
+    let N = arr.length;
     
-    const check = (sx, sy, length) => {
-        const first = arr[sx][sy];
-        const half = Math.floor(length / 2);
+    const check = (nx, ny, length) => {
+        let start = arr[nx][ny];
+        let half = Math.floor(length / 2);
         
-        for(let i = sx; i < sx + length; i++) {
-            for(let j = sy; j < sy + length; j++) {
-                if(arr[i][j] !== first) {
-                    check(sx, sy, half);
-                    check(sx + half, sy, half);
-                    check(sx, sy + half, half);
-                    check(sx + half, sy + half, half);
-                    
+        for(let i= nx; i < nx + length; i++) {
+            for(let j = ny; j < ny + length; j++) {
+                if(arr[i][j] !== start) {
+                    check(nx, ny, half);
+                    check(nx + half, ny, half);
+                    check(nx, ny + half, half);
+                    check(nx + half, ny + half, half);
                     return;
                 }
             }
         }
-        ans[first]++;
+        answer[start]++;
     }
-    check(0, 0, m);
-    return ans;
+    check(0, 0, N);
+    return answer;
 }
