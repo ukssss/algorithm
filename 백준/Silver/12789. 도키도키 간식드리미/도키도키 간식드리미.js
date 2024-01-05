@@ -8,27 +8,28 @@ const [N, list] = require('fs')
 const stack = [];
 let top = 0;
 let cur = 1;
-let output = '';
+let result = '';
 
-list.forEach((element) => {
+list.forEach((e) => {
     while (stack[top - 1] === cur) {
         stack.pop();
         top--;
         cur++;
     }
 
-    if (element !== cur) {
-        stack.push(element);
+    if (e !== cur) {
+        stack.push(e);
         top++;
     } else {
         cur++;
     }
 });
 
-while (stack.pop() === cur) {
+while (stack[top - 1] === cur) {
+    stack.pop();
     top--;
     cur++;
 }
 
-top === 0 ? (output = 'Nice') : (output = 'Sad');
-console.log(output);
+top !== 0 ? (result = 'Sad') : (result = 'Nice');
+console.log(result);
